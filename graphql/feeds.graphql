@@ -1,0 +1,33 @@
+query myFeedUsers {
+  users {
+    name
+    id
+  }
+}
+
+query myFeedSellers {
+  sellers{
+    name
+    id
+  }
+}
+
+query myFeedPartnerships {
+  partnerships{
+    id
+    accepted
+    partner{
+      name
+    }
+  }
+}
+
+query myFeedPatronships {
+  patronships{
+    id
+    accepted
+    partner{
+      name
+    }
+  }
+}

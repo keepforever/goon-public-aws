@@ -1,0 +1,20 @@
+query myFeedSellers {
+  sellers {
+    name
+    id
+  }
+}
+
+query myMeUser {
+  meUser {
+    name
+    id
+  }
+}
+
+query myFeedUsers {
+  users{
+    name
+    id
+  }
+}

@@ -1,0 +1,314 @@
+### this file contains queries and mutations used in the GraphQL playground
+### for quick formatting and database seeding.
+
+# b's token
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjam50bDZpODMwMDByMGE3N2Fpb2xwaDYxIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1NDA3NzQyMDZ9.fwqjsS8fw-Y2s6kRvdZjDxjg5IAozRGYc0txW8hPvvM"
+}
+
+# s's token
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamxzZ2o0M3QwMDFkMDgzNm5nYWh6dXgxIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzYzNTk3MzB9.sNE4Jnze7f3O2mZKIxY26-gaLTTEN-Zchi6z6-vPzeo"
+}
+
+### Create Request Query Args
+{
+  "author": "cjjj0sapuq2vd0b37czhnbj80",
+  "recipient": "cjjj16bqeq43j0b378utu796v",
+  "title": "String!",
+  "text": "String!",
+  "wants": ["String"],
+  "isPublished": true
+}
+
+###############################################################################
+
+###############################################################################
+
+###############################################################################
+
+# b's userId:  cjlselw6800030802gwub6jdb
+
+######## SIGN UP #######
+mutation myUserSignUp {
+  userSignup(
+    name:"b",
+    email:"b",
+    password:"b"
+  ) {
+    user{
+      id
+      name
+    }
+    token
+  }
+}
+
+mutation mySellerSignUp {
+  sellerSignup(
+    name:"b",
+    email:"b",
+    password:"b"
+  ) {
+    user{
+      id
+      name
+    }
+    token
+  }
+}
+
+######## lOGIN #######
+
+mutation mySellerLogin {
+  sellerLogin(
+    email: "s",
+    password: "s") {
+    payload{
+      token
+      seller{
+        id
+        name
+      }
+    }
+    error{
+      msg
+      field
+    }
+  }
+}
+
+
+mutation myUserLogin {
+  userLogin(
+    email: "b",
+    password: "b") {
+    payload{
+      token
+      user{
+        name
+      }
+    }
+    error{
+      msg
+      field
+    }
+  }
+}
+
+
+#################### FEEDS ##################
+
+query myFeedUsers {
+  users {
+    name
+    id
+  }
+}
+
+query myFeedSellers {
+  sellers{
+    name
+    id
+  }
+}
+
+
+#### Ships ####
+
+# User creates request that goes to Seller for approval.
+mutation myCreatePartnerShipRequest {
+  createPartnership(data: {
+    partner: { connect: {id: "cjlsgj43t001d0836ngahzux1"}},
+    allowance:1,
+    accepted:false,
+    verified:true
+  }) {
+    id
+    partner {
+      name
+      id
+    }
+    allowance
+    accepted
+    verified
+    updatedAt
+    createdAt
+  }
+}
+
+# Seller's request to User (maybe, if I allow it) or
+# OTHERWISE the complement to the User's createPartnership
+# mutation that get's created within the
+# createPartnership resolver.
+
+# patron ID is b's
+mutation myCreatePatronshipRequest {
+  createPatronship(data: {
+    patron: { connect: {id: "cjlsginzg00180836r1gxn229"}},
+    allowance:1,
+    accepted:false,
+    verified:false
+  }) {
+    id
+    patron {
+      name
+      id
+    }
+    allowance
+    accepted
+    verified
+    updatedAt
+    createdAt
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+###############################################
+###############################################
+
+## EVERYTHING BELOW HERE IS BOILER/REFERENCE ##
+
+###############################################
+###############################################
+
+
+
+
+# Create a Message
+mutation myCreateMessage {
+  createMessage(data:{
+    text:"HELLO 1",
+    author:{connect:{id:"cjlomo143000j0919xq7by162"}}
+  }) {
+    id
+    text
+    author{
+      name
+    }
+  }
+}
+
+
+mutation createSnippit {
+  createSnippit(data:{
+    author:{connect:{id:"cjlcvog4u000v0d47dwxjkfp4"}}
+    name:"subscription Test 55 ",
+    language:"python",
+    code:"const henery = \"the eighth \" \n } \n",
+    type:"boiler",
+    framework:"ReactJS",
+    notes:"do it like this",
+    companion:{
+      set:["https://material-ui.com/", "www.google.com", "www.briancilenti.com"]
+    },
+    keywords:{
+      set:["server", "mutation", "css", "styling", "css modules"]
+    },
+    reference:{
+      set:["https://github.com/keepforever/itm-server", "http://www.keepforeverrecords.com"]
+    },
+  }) {
+    id
+    name
+    author{
+      name
+    }
+  }
+}
+
+subscription testSub {
+	snippit
+}
+
+query feedRedis {
+  rediss {
+    author {
+      name
+    }
+  }
+}
+
+query setRediskeys {
+  snippits{
+    id
+  }
+}
+
+subscription ttestSub {
+  ttest
+}
+
+subscription messageSub {
+  message{
+    id
+    text
+    createdAt
+    author{
+      id
+      name
+    }
+  }
+}
+
+
+mutation myLogin {
+  login(email:"z", password:"z") {
+    payload{
+      user{
+        id
+      }
+      token
+    }
+  }
+}
+
+mutation createUser {
+  createUser(data:{
+    name: "z",
+    email: "z",
+    password: "z"
+  }) {
+    id
+    name
+    email
+  }
+}
+
+# Try to write your query here
+query feedMessages {
+  messages{
+    author{
+      name
+    }
+    text
+  }
+}
+
+query feedSnippits {
+  snippits{
+    name
+  }
+}
+
+query feedUsers {
+  users{
+    id
+  }
+}
+
+query feedRediss {
+  rediss{
+    name
+  }
+}

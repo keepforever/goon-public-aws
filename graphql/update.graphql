@@ -1,0 +1,36 @@
+# note 'partnership' calls for 'partner' 
+mutation myUpdatePartnership {
+  updatePartnership (
+    data:{
+      accepted: true
+    }
+    where:{
+      id:"cjlsjcg1e001r0836452f5dmu" # variable
+    }
+  ){
+    id
+    partner{
+      name
+      id
+    }
+    accepted   
+  }
+}
+
+mutation myUpdatePatronship {
+  updatePatronship (
+    data:{
+      accepted: true
+    }
+    where:{
+      id:"cjlsjcg1e001r0836452f5dmu" # variable
+    }
+  ){
+    id
+    patron {
+      name
+      id
+    }
+    accepted   
+  }
+}

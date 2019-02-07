@@ -1,0 +1,2170 @@
+# source: http://localhost:4466
+# timestamp: Sat Feb 02 2019 00:32:14 GMT-0800 (Pacific Standard Time)
+
+type AggregateConnection {
+  count: Int!
+}
+
+type AggregateMessage {
+  count: Int!
+}
+
+type AggregateSellerInfo {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateUserInfo {
+  count: Int!
+}
+
+type AggregateUserSettings {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+type Connection implements Node {
+  id: ID!
+  allowance: Int!
+  friend(where: UserWhereInput): User!
+  about: String!
+  verified: Boolean
+  accepted: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type ConnectionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ConnectionEdge]!
+  aggregate: AggregateConnection!
+}
+
+input ConnectionCreateInput {
+  allowance: Int!
+  about: String
+  verified: Boolean
+  accepted: Boolean
+  friend: UserCreateOneWithoutConnectionsInput!
+}
+
+input ConnectionCreateManyWithoutFriendInput {
+  create: [ConnectionCreateWithoutFriendInput!]
+  connect: [ConnectionWhereUniqueInput!]
+}
+
+input ConnectionCreateWithoutFriendInput {
+  allowance: Int!
+  about: String
+  verified: Boolean
+  accepted: Boolean
+}
+
+"""An edge in a connection."""
+type ConnectionEdge {
+  """The item at the end of the edge."""
+  node: Connection!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ConnectionOrderByInput {
+  id_ASC
+  id_DESC
+  allowance_ASC
+  allowance_DESC
+  about_ASC
+  about_DESC
+  verified_ASC
+  verified_DESC
+  accepted_ASC
+  accepted_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ConnectionPreviousValues {
+  id: ID!
+  allowance: Int!
+  about: String!
+  verified: Boolean
+  accepted: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ConnectionSubscriptionPayload {
+  mutation: MutationType!
+  node: Connection
+  updatedFields: [String!]
+  previousValues: ConnectionPreviousValues
+}
+
+input ConnectionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ConnectionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ConnectionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ConnectionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ConnectionWhereInput
+}
+
+input ConnectionUpdateInput {
+  allowance: Int
+  about: String
+  verified: Boolean
+  accepted: Boolean
+  friend: UserUpdateOneWithoutConnectionsInput
+}
+
+input ConnectionUpdateManyWithoutFriendInput {
+  create: [ConnectionCreateWithoutFriendInput!]
+  connect: [ConnectionWhereUniqueInput!]
+  disconnect: [ConnectionWhereUniqueInput!]
+  delete: [ConnectionWhereUniqueInput!]
+  update: [ConnectionUpdateWithWhereUniqueWithoutFriendInput!]
+  upsert: [ConnectionUpsertWithWhereUniqueWithoutFriendInput!]
+}
+
+input ConnectionUpdateWithoutFriendDataInput {
+  allowance: Int
+  about: String
+  verified: Boolean
+  accepted: Boolean
+}
+
+input ConnectionUpdateWithWhereUniqueWithoutFriendInput {
+  where: ConnectionWhereUniqueInput!
+  data: ConnectionUpdateWithoutFriendDataInput!
+}
+
+input ConnectionUpsertWithWhereUniqueWithoutFriendInput {
+  where: ConnectionWhereUniqueInput!
+  update: ConnectionUpdateWithoutFriendDataInput!
+  create: ConnectionCreateWithoutFriendInput!
+}
+
+input ConnectionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ConnectionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ConnectionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ConnectionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  allowance: Int
+
+  """All values that are not equal to given value."""
+  allowance_not: Int
+
+  """All values that are contained in given list."""
+  allowance_in: [Int!]
+
+  """All values that are not contained in given list."""
+  allowance_not_in: [Int!]
+
+  """All values less than the given value."""
+  allowance_lt: Int
+
+  """All values less than or equal the given value."""
+  allowance_lte: Int
+
+  """All values greater than the given value."""
+  allowance_gt: Int
+
+  """All values greater than or equal the given value."""
+  allowance_gte: Int
+  about: String
+
+  """All values that are not equal to given value."""
+  about_not: String
+
+  """All values that are contained in given list."""
+  about_in: [String!]
+
+  """All values that are not contained in given list."""
+  about_not_in: [String!]
+
+  """All values less than the given value."""
+  about_lt: String
+
+  """All values less than or equal the given value."""
+  about_lte: String
+
+  """All values greater than the given value."""
+  about_gt: String
+
+  """All values greater than or equal the given value."""
+  about_gte: String
+
+  """All values containing the given string."""
+  about_contains: String
+
+  """All values not containing the given string."""
+  about_not_contains: String
+
+  """All values starting with the given string."""
+  about_starts_with: String
+
+  """All values not starting with the given string."""
+  about_not_starts_with: String
+
+  """All values ending with the given string."""
+  about_ends_with: String
+
+  """All values not ending with the given string."""
+  about_not_ends_with: String
+  verified: Boolean
+
+  """All values that are not equal to given value."""
+  verified_not: Boolean
+  accepted: Boolean
+
+  """All values that are not equal to given value."""
+  accepted_not: Boolean
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  friend: UserWhereInput
+}
+
+input ConnectionWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Message implements Node {
+  id: ID!
+  author(where: UserWhereInput): User!
+  recipient(where: UserWhereInput): User!
+  type: String!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type MessageConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MessageEdge]!
+  aggregate: AggregateMessage!
+}
+
+input MessageCreateInput {
+  type: String
+  text: String!
+  author: UserCreateOneWithoutOutboxInput!
+  recipient: UserCreateOneWithoutInboxInput!
+}
+
+input MessageCreateManyWithoutAuthorInput {
+  create: [MessageCreateWithoutAuthorInput!]
+  connect: [MessageWhereUniqueInput!]
+}
+
+input MessageCreateManyWithoutRecipientInput {
+  create: [MessageCreateWithoutRecipientInput!]
+  connect: [MessageWhereUniqueInput!]
+}
+
+input MessageCreateWithoutAuthorInput {
+  type: String
+  text: String!
+  recipient: UserCreateOneWithoutInboxInput!
+}
+
+input MessageCreateWithoutRecipientInput {
+  type: String
+  text: String!
+  author: UserCreateOneWithoutOutboxInput!
+}
+
+"""An edge in a connection."""
+type MessageEdge {
+  """The item at the end of the edge."""
+  node: Message!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum MessageOrderByInput {
+  id_ASC
+  id_DESC
+  type_ASC
+  type_DESC
+  text_ASC
+  text_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type MessagePreviousValues {
+  id: ID!
+  type: String!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type MessageSubscriptionPayload {
+  mutation: MutationType!
+  node: Message
+  updatedFields: [String!]
+  previousValues: MessagePreviousValues
+}
+
+input MessageSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MessageSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MessageSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MessageSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: MessageWhereInput
+}
+
+input MessageUpdateInput {
+  type: String
+  text: String
+  author: UserUpdateOneWithoutOutboxInput
+  recipient: UserUpdateOneWithoutInboxInput
+}
+
+input MessageUpdateManyWithoutAuthorInput {
+  create: [MessageCreateWithoutAuthorInput!]
+  connect: [MessageWhereUniqueInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  delete: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input MessageUpdateManyWithoutRecipientInput {
+  create: [MessageCreateWithoutRecipientInput!]
+  connect: [MessageWhereUniqueInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  delete: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutRecipientInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutRecipientInput!]
+}
+
+input MessageUpdateWithoutAuthorDataInput {
+  type: String
+  text: String
+  recipient: UserUpdateOneWithoutInboxInput
+}
+
+input MessageUpdateWithoutRecipientDataInput {
+  type: String
+  text: String
+  author: UserUpdateOneWithoutOutboxInput
+}
+
+input MessageUpdateWithWhereUniqueWithoutAuthorInput {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateWithoutAuthorDataInput!
+}
+
+input MessageUpdateWithWhereUniqueWithoutRecipientInput {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateWithoutRecipientDataInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutAuthorInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutAuthorDataInput!
+  create: MessageCreateWithoutAuthorInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutRecipientInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutRecipientDataInput!
+  create: MessageCreateWithoutRecipientInput!
+}
+
+input MessageWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MessageWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MessageWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MessageWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  author: UserWhereInput
+  recipient: UserWhereInput
+}
+
+input MessageWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createUserInfo(data: UserInfoCreateInput!): UserInfo!
+  createSellerInfo(data: SellerInfoCreateInput!): SellerInfo!
+  createMessage(data: MessageCreateInput!): Message!
+  createConnection(data: ConnectionCreateInput!): Connection!
+  createUserSettings(data: UserSettingsCreateInput!): UserSettings!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateUserInfo(data: UserInfoUpdateInput!, where: UserInfoWhereUniqueInput!): UserInfo
+  updateSellerInfo(data: SellerInfoUpdateInput!, where: SellerInfoWhereUniqueInput!): SellerInfo
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateConnection(data: ConnectionUpdateInput!, where: ConnectionWhereUniqueInput!): Connection
+  updateUserSettings(data: UserSettingsUpdateInput!, where: UserSettingsWhereUniqueInput!): UserSettings
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteUserInfo(where: UserInfoWhereUniqueInput!): UserInfo
+  deleteSellerInfo(where: SellerInfoWhereUniqueInput!): SellerInfo
+  deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteConnection(where: ConnectionWhereUniqueInput!): Connection
+  deleteUserSettings(where: UserSettingsWhereUniqueInput!): UserSettings
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertUserInfo(where: UserInfoWhereUniqueInput!, create: UserInfoCreateInput!, update: UserInfoUpdateInput!): UserInfo!
+  upsertSellerInfo(where: SellerInfoWhereUniqueInput!, create: SellerInfoCreateInput!, update: SellerInfoUpdateInput!): SellerInfo!
+  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  upsertConnection(where: ConnectionWhereUniqueInput!, create: ConnectionCreateInput!, update: ConnectionUpdateInput!): Connection!
+  upsertUserSettings(where: UserSettingsWhereUniqueInput!, create: UserSettingsCreateInput!, update: UserSettingsUpdateInput!): UserSettings!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyUserInfoes(data: UserInfoUpdateInput!, where: UserInfoWhereInput): BatchPayload!
+  updateManySellerInfoes(data: SellerInfoUpdateInput!, where: SellerInfoWhereInput): BatchPayload!
+  updateManyMessages(data: MessageUpdateInput!, where: MessageWhereInput): BatchPayload!
+  updateManyConnections(data: ConnectionUpdateInput!, where: ConnectionWhereInput): BatchPayload!
+  updateManyUserSettingses(data: UserSettingsUpdateInput!, where: UserSettingsWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyUserInfoes(where: UserInfoWhereInput): BatchPayload!
+  deleteManySellerInfoes(where: SellerInfoWhereInput): BatchPayload!
+  deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  deleteManyConnections(where: ConnectionWhereInput): BatchPayload!
+  deleteManyUserSettingses(where: UserSettingsWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  userInfoes(where: UserInfoWhereInput, orderBy: UserInfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserInfo]!
+  sellerInfoes(where: SellerInfoWhereInput, orderBy: SellerInfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SellerInfo]!
+  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  connections(where: ConnectionWhereInput, orderBy: ConnectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Connection]!
+  userSettingses(where: UserSettingsWhereInput, orderBy: UserSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserSettings]!
+  user(where: UserWhereUniqueInput!): User
+  userInfo(where: UserInfoWhereUniqueInput!): UserInfo
+  sellerInfo(where: SellerInfoWhereUniqueInput!): SellerInfo
+  message(where: MessageWhereUniqueInput!): Message
+  connection(where: ConnectionWhereUniqueInput!): Connection
+  userSettings(where: UserSettingsWhereUniqueInput!): UserSettings
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  userInfoesConnection(where: UserInfoWhereInput, orderBy: UserInfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserInfoConnection!
+  sellerInfoesConnection(where: SellerInfoWhereInput, orderBy: SellerInfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SellerInfoConnection!
+  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  connectionsConnection(where: ConnectionWhereInput, orderBy: ConnectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConnectionConnection!
+  userSettingsesConnection(where: UserSettingsWhereInput, orderBy: UserSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserSettingsConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type SellerInfo implements Node {
+  id: ID!
+  seller(where: UserWhereInput): User!
+  about: String!
+  offerings: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+"""A connection to a list of items."""
+type SellerInfoConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SellerInfoEdge]!
+  aggregate: AggregateSellerInfo!
+}
+
+input SellerInfoCreateInput {
+  about: String!
+  age: Int!
+  zipCode: Int!
+  offerings: SellerInfoCreateofferingsInput
+  seller: UserCreateOneWithoutSellerInfoInput!
+}
+
+input SellerInfoCreateofferingsInput {
+  set: [String!]
+}
+
+input SellerInfoCreateOneWithoutSellerInput {
+  create: SellerInfoCreateWithoutSellerInput
+  connect: SellerInfoWhereUniqueInput
+}
+
+input SellerInfoCreateWithoutSellerInput {
+  about: String!
+  age: Int!
+  zipCode: Int!
+  offerings: SellerInfoCreateofferingsInput
+}
+
+"""An edge in a connection."""
+type SellerInfoEdge {
+  """The item at the end of the edge."""
+  node: SellerInfo!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SellerInfoOrderByInput {
+  id_ASC
+  id_DESC
+  about_ASC
+  about_DESC
+  age_ASC
+  age_DESC
+  zipCode_ASC
+  zipCode_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SellerInfoPreviousValues {
+  id: ID!
+  about: String!
+  offerings: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+type SellerInfoSubscriptionPayload {
+  mutation: MutationType!
+  node: SellerInfo
+  updatedFields: [String!]
+  previousValues: SellerInfoPreviousValues
+}
+
+input SellerInfoSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SellerInfoSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SellerInfoSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SellerInfoSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SellerInfoWhereInput
+}
+
+input SellerInfoUpdateInput {
+  about: String
+  age: Int
+  zipCode: Int
+  offerings: SellerInfoUpdateofferingsInput
+  seller: UserUpdateOneWithoutSellerInfoInput
+}
+
+input SellerInfoUpdateofferingsInput {
+  set: [String!]
+}
+
+input SellerInfoUpdateOneWithoutSellerInput {
+  create: SellerInfoCreateWithoutSellerInput
+  connect: SellerInfoWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SellerInfoUpdateWithoutSellerDataInput
+  upsert: SellerInfoUpsertWithoutSellerInput
+}
+
+input SellerInfoUpdateWithoutSellerDataInput {
+  about: String
+  age: Int
+  zipCode: Int
+  offerings: SellerInfoUpdateofferingsInput
+}
+
+input SellerInfoUpsertWithoutSellerInput {
+  update: SellerInfoUpdateWithoutSellerDataInput!
+  create: SellerInfoCreateWithoutSellerInput!
+}
+
+input SellerInfoWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SellerInfoWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SellerInfoWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SellerInfoWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  about: String
+
+  """All values that are not equal to given value."""
+  about_not: String
+
+  """All values that are contained in given list."""
+  about_in: [String!]
+
+  """All values that are not contained in given list."""
+  about_not_in: [String!]
+
+  """All values less than the given value."""
+  about_lt: String
+
+  """All values less than or equal the given value."""
+  about_lte: String
+
+  """All values greater than the given value."""
+  about_gt: String
+
+  """All values greater than or equal the given value."""
+  about_gte: String
+
+  """All values containing the given string."""
+  about_contains: String
+
+  """All values not containing the given string."""
+  about_not_contains: String
+
+  """All values starting with the given string."""
+  about_starts_with: String
+
+  """All values not starting with the given string."""
+  about_not_starts_with: String
+
+  """All values ending with the given string."""
+  about_ends_with: String
+
+  """All values not ending with the given string."""
+  about_not_ends_with: String
+  age: Int
+
+  """All values that are not equal to given value."""
+  age_not: Int
+
+  """All values that are contained in given list."""
+  age_in: [Int!]
+
+  """All values that are not contained in given list."""
+  age_not_in: [Int!]
+
+  """All values less than the given value."""
+  age_lt: Int
+
+  """All values less than or equal the given value."""
+  age_lte: Int
+
+  """All values greater than the given value."""
+  age_gt: Int
+
+  """All values greater than or equal the given value."""
+  age_gte: Int
+  zipCode: Int
+
+  """All values that are not equal to given value."""
+  zipCode_not: Int
+
+  """All values that are contained in given list."""
+  zipCode_in: [Int!]
+
+  """All values that are not contained in given list."""
+  zipCode_not_in: [Int!]
+
+  """All values less than the given value."""
+  zipCode_lt: Int
+
+  """All values less than or equal the given value."""
+  zipCode_lte: Int
+
+  """All values greater than the given value."""
+  zipCode_gt: Int
+
+  """All values greater than or equal the given value."""
+  zipCode_gte: Int
+  seller: UserWhereInput
+}
+
+input SellerInfoWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  userInfo(where: UserInfoSubscriptionWhereInput): UserInfoSubscriptionPayload
+  sellerInfo(where: SellerInfoSubscriptionWhereInput): SellerInfoSubscriptionPayload
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  connection(where: ConnectionSubscriptionWhereInput): ConnectionSubscriptionPayload
+  userSettings(where: UserSettingsSubscriptionWhereInput): UserSettingsSubscriptionPayload
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userInfo(where: UserInfoWhereInput): UserInfo
+  userSettings(where: UserSettingsWhereInput): UserSettings
+  sellerInfo(where: SellerInfoWhereInput): SellerInfo
+  connections(where: ConnectionWhereInput, orderBy: ConnectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Connection!]
+  inbox(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  outbox(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userInfo: UserInfoCreateOneWithoutUserInput
+  userSettings: UserSettingsCreateOneInput
+  sellerInfo: SellerInfoCreateOneWithoutSellerInput
+  connections: ConnectionCreateManyWithoutFriendInput
+  inbox: MessageCreateManyWithoutRecipientInput
+  outbox: MessageCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutConnectionsInput {
+  create: UserCreateWithoutConnectionsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutInboxInput {
+  create: UserCreateWithoutInboxInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutOutboxInput {
+  create: UserCreateWithoutOutboxInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutSellerInfoInput {
+  create: UserCreateWithoutSellerInfoInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutUserInfoInput {
+  create: UserCreateWithoutUserInfoInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutConnectionsInput {
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userInfo: UserInfoCreateOneWithoutUserInput
+  userSettings: UserSettingsCreateOneInput
+  sellerInfo: SellerInfoCreateOneWithoutSellerInput
+  inbox: MessageCreateManyWithoutRecipientInput
+  outbox: MessageCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutInboxInput {
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userInfo: UserInfoCreateOneWithoutUserInput
+  userSettings: UserSettingsCreateOneInput
+  sellerInfo: SellerInfoCreateOneWithoutSellerInput
+  connections: ConnectionCreateManyWithoutFriendInput
+  outbox: MessageCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutOutboxInput {
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userInfo: UserInfoCreateOneWithoutUserInput
+  userSettings: UserSettingsCreateOneInput
+  sellerInfo: SellerInfoCreateOneWithoutSellerInput
+  connections: ConnectionCreateManyWithoutFriendInput
+  inbox: MessageCreateManyWithoutRecipientInput
+}
+
+input UserCreateWithoutSellerInfoInput {
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userInfo: UserInfoCreateOneWithoutUserInput
+  userSettings: UserSettingsCreateOneInput
+  connections: ConnectionCreateManyWithoutFriendInput
+  inbox: MessageCreateManyWithoutRecipientInput
+  outbox: MessageCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutUserInfoInput {
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  userSettings: UserSettingsCreateOneInput
+  sellerInfo: SellerInfoCreateOneWithoutSellerInput
+  connections: ConnectionCreateManyWithoutFriendInput
+  inbox: MessageCreateManyWithoutRecipientInput
+  outbox: MessageCreateManyWithoutAuthorInput
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+type UserInfo implements Node {
+  id: ID!
+  user(where: UserWhereInput): User!
+  about: String!
+  interests: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+"""A connection to a list of items."""
+type UserInfoConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserInfoEdge]!
+  aggregate: AggregateUserInfo!
+}
+
+input UserInfoCreateInput {
+  about: String!
+  age: Int!
+  zipCode: Int!
+  interests: UserInfoCreateinterestsInput
+  user: UserCreateOneWithoutUserInfoInput!
+}
+
+input UserInfoCreateinterestsInput {
+  set: [String!]
+}
+
+input UserInfoCreateOneWithoutUserInput {
+  create: UserInfoCreateWithoutUserInput
+  connect: UserInfoWhereUniqueInput
+}
+
+input UserInfoCreateWithoutUserInput {
+  about: String!
+  age: Int!
+  zipCode: Int!
+  interests: UserInfoCreateinterestsInput
+}
+
+"""An edge in a connection."""
+type UserInfoEdge {
+  """The item at the end of the edge."""
+  node: UserInfo!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserInfoOrderByInput {
+  id_ASC
+  id_DESC
+  about_ASC
+  about_DESC
+  age_ASC
+  age_DESC
+  zipCode_ASC
+  zipCode_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserInfoPreviousValues {
+  id: ID!
+  about: String!
+  interests: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+type UserInfoSubscriptionPayload {
+  mutation: MutationType!
+  node: UserInfo
+  updatedFields: [String!]
+  previousValues: UserInfoPreviousValues
+}
+
+input UserInfoSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserInfoSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserInfoSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserInfoSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserInfoWhereInput
+}
+
+input UserInfoUpdateInput {
+  about: String
+  age: Int
+  zipCode: Int
+  interests: UserInfoUpdateinterestsInput
+  user: UserUpdateOneWithoutUserInfoInput
+}
+
+input UserInfoUpdateinterestsInput {
+  set: [String!]
+}
+
+input UserInfoUpdateOneWithoutUserInput {
+  create: UserInfoCreateWithoutUserInput
+  connect: UserInfoWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserInfoUpdateWithoutUserDataInput
+  upsert: UserInfoUpsertWithoutUserInput
+}
+
+input UserInfoUpdateWithoutUserDataInput {
+  about: String
+  age: Int
+  zipCode: Int
+  interests: UserInfoUpdateinterestsInput
+}
+
+input UserInfoUpsertWithoutUserInput {
+  update: UserInfoUpdateWithoutUserDataInput!
+  create: UserInfoCreateWithoutUserInput!
+}
+
+input UserInfoWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserInfoWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserInfoWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserInfoWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  about: String
+
+  """All values that are not equal to given value."""
+  about_not: String
+
+  """All values that are contained in given list."""
+  about_in: [String!]
+
+  """All values that are not contained in given list."""
+  about_not_in: [String!]
+
+  """All values less than the given value."""
+  about_lt: String
+
+  """All values less than or equal the given value."""
+  about_lte: String
+
+  """All values greater than the given value."""
+  about_gt: String
+
+  """All values greater than or equal the given value."""
+  about_gte: String
+
+  """All values containing the given string."""
+  about_contains: String
+
+  """All values not containing the given string."""
+  about_not_contains: String
+
+  """All values starting with the given string."""
+  about_starts_with: String
+
+  """All values not starting with the given string."""
+  about_not_starts_with: String
+
+  """All values ending with the given string."""
+  about_ends_with: String
+
+  """All values not ending with the given string."""
+  about_not_ends_with: String
+  age: Int
+
+  """All values that are not equal to given value."""
+  age_not: Int
+
+  """All values that are contained in given list."""
+  age_in: [Int!]
+
+  """All values that are not contained in given list."""
+  age_not_in: [Int!]
+
+  """All values less than the given value."""
+  age_lt: Int
+
+  """All values less than or equal the given value."""
+  age_lte: Int
+
+  """All values greater than the given value."""
+  age_gt: Int
+
+  """All values greater than or equal the given value."""
+  age_gte: Int
+  zipCode: Int
+
+  """All values that are not equal to given value."""
+  zipCode_not: Int
+
+  """All values that are contained in given list."""
+  zipCode_in: [Int!]
+
+  """All values that are not contained in given list."""
+  zipCode_not_in: [Int!]
+
+  """All values less than the given value."""
+  zipCode_lt: Int
+
+  """All values less than or equal the given value."""
+  zipCode_lte: Int
+
+  """All values greater than the given value."""
+  zipCode_gt: Int
+
+  """All values greater than or equal the given value."""
+  zipCode_gte: Int
+  user: UserWhereInput
+}
+
+input UserInfoWhereUniqueInput {
+  id: ID
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  isSeller_ASC
+  isSeller_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  isSeller: Boolean
+  createdAt: DateTime!
+}
+
+type UserSettings implements Node {
+  id: ID!
+  userId: String!
+  darkMode: Boolean
+  autoAccept: Boolean
+}
+
+"""A connection to a list of items."""
+type UserSettingsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserSettingsEdge]!
+  aggregate: AggregateUserSettings!
+}
+
+input UserSettingsCreateInput {
+  userId: String!
+  darkMode: Boolean
+  autoAccept: Boolean
+}
+
+input UserSettingsCreateOneInput {
+  create: UserSettingsCreateInput
+  connect: UserSettingsWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type UserSettingsEdge {
+  """The item at the end of the edge."""
+  node: UserSettings!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserSettingsOrderByInput {
+  id_ASC
+  id_DESC
+  userId_ASC
+  userId_DESC
+  darkMode_ASC
+  darkMode_DESC
+  autoAccept_ASC
+  autoAccept_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserSettingsPreviousValues {
+  id: ID!
+  userId: String!
+  darkMode: Boolean
+  autoAccept: Boolean
+}
+
+type UserSettingsSubscriptionPayload {
+  mutation: MutationType!
+  node: UserSettings
+  updatedFields: [String!]
+  previousValues: UserSettingsPreviousValues
+}
+
+input UserSettingsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSettingsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSettingsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSettingsSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserSettingsWhereInput
+}
+
+input UserSettingsUpdateDataInput {
+  userId: String
+  darkMode: Boolean
+  autoAccept: Boolean
+}
+
+input UserSettingsUpdateInput {
+  userId: String
+  darkMode: Boolean
+  autoAccept: Boolean
+}
+
+input UserSettingsUpdateOneInput {
+  create: UserSettingsCreateInput
+  connect: UserSettingsWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserSettingsUpdateDataInput
+  upsert: UserSettingsUpsertNestedInput
+}
+
+input UserSettingsUpsertNestedInput {
+  update: UserSettingsUpdateDataInput!
+  create: UserSettingsCreateInput!
+}
+
+input UserSettingsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSettingsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSettingsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSettingsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  userId: String
+
+  """All values that are not equal to given value."""
+  userId_not: String
+
+  """All values that are contained in given list."""
+  userId_in: [String!]
+
+  """All values that are not contained in given list."""
+  userId_not_in: [String!]
+
+  """All values less than the given value."""
+  userId_lt: String
+
+  """All values less than or equal the given value."""
+  userId_lte: String
+
+  """All values greater than the given value."""
+  userId_gt: String
+
+  """All values greater than or equal the given value."""
+  userId_gte: String
+
+  """All values containing the given string."""
+  userId_contains: String
+
+  """All values not containing the given string."""
+  userId_not_contains: String
+
+  """All values starting with the given string."""
+  userId_starts_with: String
+
+  """All values not starting with the given string."""
+  userId_not_starts_with: String
+
+  """All values ending with the given string."""
+  userId_ends_with: String
+
+  """All values not ending with the given string."""
+  userId_not_ends_with: String
+  darkMode: Boolean
+
+  """All values that are not equal to given value."""
+  darkMode_not: Boolean
+  autoAccept: Boolean
+
+  """All values that are not equal to given value."""
+  autoAccept_not: Boolean
+}
+
+input UserSettingsWhereUniqueInput {
+  id: ID
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+  isSeller: Boolean
+  userInfo: UserInfoUpdateOneWithoutUserInput
+  userSettings: UserSettingsUpdateOneInput
+  sellerInfo: SellerInfoUpdateOneWithoutSellerInput
+  connections: ConnectionUpdateManyWithoutFriendInput
+  inbox: MessageUpdateManyWithoutRecipientInput
+  outbox: MessageUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateOneWithoutConnectionsInput {
+  create: UserCreateWithoutConnectionsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutConnectionsDataInput
+  upsert: UserUpsertWithoutConnectionsInput
+}
+
+input UserUpdateOneWithoutInboxInput {
+  create: UserCreateWithoutInboxInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutInboxDataInput
+  upsert: UserUpsertWithoutInboxInput
+}
+
+input UserUpdateOneWithoutOutboxInput {
+  create: UserCreateWithoutOutboxInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutOutboxDataInput
+  upsert: UserUpsertWithoutOutboxInput
+}
+
+input UserUpdateOneWithoutSellerInfoInput {
+  create: UserCreateWithoutSellerInfoInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutSellerInfoDataInput
+  upsert: UserUpsertWithoutSellerInfoInput
+}
+
+input UserUpdateOneWithoutUserInfoInput {
+  create: UserCreateWithoutUserInfoInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutUserInfoDataInput
+  upsert: UserUpsertWithoutUserInfoInput
+}
+
+input UserUpdateWithoutConnectionsDataInput {
+  name: String
+  email: String
+  password: String
+  isSeller: Boolean
+  userInfo: UserInfoUpdateOneWithoutUserInput
+  userSettings: UserSettingsUpdateOneInput
+  sellerInfo: SellerInfoUpdateOneWithoutSellerInput
+  inbox: MessageUpdateManyWithoutRecipientInput
+  outbox: MessageUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutInboxDataInput {
+  name: String
+  email: String
+  password: String
+  isSeller: Boolean
+  userInfo: UserInfoUpdateOneWithoutUserInput
+  userSettings: UserSettingsUpdateOneInput
+  sellerInfo: SellerInfoUpdateOneWithoutSellerInput
+  connections: ConnectionUpdateManyWithoutFriendInput
+  outbox: MessageUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutOutboxDataInput {
+  name: String
+  email: String
+  password: String
+  isSeller: Boolean
+  userInfo: UserInfoUpdateOneWithoutUserInput
+  userSettings: UserSettingsUpdateOneInput
+  sellerInfo: SellerInfoUpdateOneWithoutSellerInput
+  connections: ConnectionUpdateManyWithoutFriendInput
+  inbox: MessageUpdateManyWithoutRecipientInput
+}
+
+input UserUpdateWithoutSellerInfoDataInput {
+  name: String
+  email: String
+  password: String
+  isSeller: Boolean
+  userInfo: UserInfoUpdateOneWithoutUserInput
+  userSettings: UserSettingsUpdateOneInput
+  connections: ConnectionUpdateManyWithoutFriendInput
+  inbox: MessageUpdateManyWithoutRecipientInput
+  outbox: MessageUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutUserInfoDataInput {
+  name: String
+  email: String
+  password: String
+  isSeller: Boolean
+  userSettings: UserSettingsUpdateOneInput
+  sellerInfo: SellerInfoUpdateOneWithoutSellerInput
+  connections: ConnectionUpdateManyWithoutFriendInput
+  inbox: MessageUpdateManyWithoutRecipientInput
+  outbox: MessageUpdateManyWithoutAuthorInput
+}
+
+input UserUpsertWithoutConnectionsInput {
+  update: UserUpdateWithoutConnectionsDataInput!
+  create: UserCreateWithoutConnectionsInput!
+}
+
+input UserUpsertWithoutInboxInput {
+  update: UserUpdateWithoutInboxDataInput!
+  create: UserCreateWithoutInboxInput!
+}
+
+input UserUpsertWithoutOutboxInput {
+  update: UserUpdateWithoutOutboxDataInput!
+  create: UserCreateWithoutOutboxInput!
+}
+
+input UserUpsertWithoutSellerInfoInput {
+  update: UserUpdateWithoutSellerInfoDataInput!
+  create: UserCreateWithoutSellerInfoInput!
+}
+
+input UserUpsertWithoutUserInfoInput {
+  update: UserUpdateWithoutUserInfoDataInput!
+  create: UserCreateWithoutUserInfoInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  isSeller: Boolean
+
+  """All values that are not equal to given value."""
+  isSeller_not: Boolean
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  userInfo: UserInfoWhereInput
+  userSettings: UserSettingsWhereInput
+  sellerInfo: SellerInfoWhereInput
+  connections_every: ConnectionWhereInput
+  connections_some: ConnectionWhereInput
+  connections_none: ConnectionWhereInput
+  inbox_every: MessageWhereInput
+  inbox_some: MessageWhereInput
+  inbox_none: MessageWhereInput
+  outbox_every: MessageWhereInput
+  outbox_some: MessageWhereInput
+  outbox_none: MessageWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}

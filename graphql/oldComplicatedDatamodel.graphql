@@ -1,0 +1,184 @@
+# Default Value Guide
+#
+# type Story {
+#   isPublished: Boolean @default(value: "false")
+#   someNumber: Int! @default(value: "42")
+#   title: String! @default(value: "My New Post")
+#   publishDate: DateTime! @default(value: "2018-01-26")
+# }
+
+## MAIN TYPES ##
+type UserInfo {
+  id: ID! @unique
+  user: User!
+  about: String!
+  interests: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+type UserSettings {
+  id: ID! @unique
+  userId: String!
+  darkMode: Boolean @default(value: "true")
+  autoAccept: Boolean @default(value: "false")
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  userInfo: UserInfo
+  userSettings: UserSettings
+  userFriends: [Friendship!]!
+  userPartners: [Partnership!]!
+  reqForProposals: [RequestForProposal!]!
+  friendInbox: [FriendMessage!]!
+  partnerInbox: [PartnerMessage!]!
+  offerInbox: [Offer!]!
+  userOutbox: [UserMessage!]!
+  friendOutbox: [String!]!
+  createdAt: DateTime!
+}
+
+type SellerInfo {
+  id: ID! @unique
+  seller: Seller!
+  about: String!
+  offerings: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+type SellerSettings {
+  id: ID! @unique
+  seller: Seller!
+  darkMode: Boolean @default(value: "true")
+  autoAccept: Boolean @default(value: "false")
+}
+
+type Seller {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  sellerInfo: SellerInfo
+  sellerSettings: SellerSettings
+  patrons: [Patronship!]!
+  rfpInbox: [RequestForProposal!]!
+  userInbox: [UserMessage!]!
+  partnerOutbox: [PartnerMessage!]!
+  offers: [Offer!]!
+}
+## Friendship Types ##
+
+# User to User
+type Friendship {
+  id: ID! @unique
+  allowance: Int!
+  friend: User!
+  friendsBecause: String!  @default(value: "default-fnds-because")
+  verified: Boolean @default(value: "false")
+  accepted: Boolean @default(value: "false")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+# Seller to User
+type Patronship {
+  id: ID! @unique
+  allowance: Int!
+  patron: User!
+  patronsBecause: String!  @default(value: "default-ptns-bcuz")
+  accepted: Boolean @default(value: "false")
+  verified: Boolean @default(value: "false")
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+# User to Seller
+type Partnership {
+  id: ID! @unique
+  partner: Seller!
+  partnersBecause: String!  @default(value: "default-partner-because")
+  allowance: Int!
+  accepted: Boolean @default(value: "false")
+  verified: Boolean @default(value: "false")
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+## Messages ##
+
+# User to User
+type FriendMessage {
+  id: ID! @unique
+  author: User!
+  friendship: Friendship!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+# User to Seller
+type UserMessage {
+  id: ID! @unique
+  author: User!
+  partnership: Partnership!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+# Seller to User
+type PartnerMessage {
+  id: ID! @unique
+  author: Seller!
+  patronship: Patronship!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+## Request and Offer
+type RequestForProposal {
+  id: ID! @unique
+  title: String!
+  text: String!
+  value: Int!
+  author: User!
+  status: String! @default(value: "my-default-status")
+  recipients: [Seller!]!
+  createdAt: DateTime!
+  expiresAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# removed to decrease nesting complexity
+# rfpSpec: RFPSpec!
+# type RFPSpec {
+#   id: ID! @unique
+#   rfp: RequestForProposal!
+
+# }
+
+type Offer {
+  author: Seller!
+  recipient: User!
+  title: String!
+  rfpId: String! @default(value: "should-be-an-id")
+  text: String!
+  id: ID! @unique
+  value: Int!
+  expiresAt: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+## legacy, to be deleted
+# type SnippitCollection {
+#   id: ID! @unique
+#   name: String!
+#   author: User!
+#   snippits: [Snippit!]!
+#   language: String!
+#   framework: String!
+#   createdAt: DateTime!
+#   updatedAt: DateTime!
+# }

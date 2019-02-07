@@ -1,0 +1,18 @@
+mutation myCreateMessage {
+  createMessage(
+    data: {
+      recipient: { connect: { id: "cjrpjrg42000h0b83q8r80ags" } }
+      text: "hello world"
+      type: "some-type"
+      author: { connect: { id: "cjrpjrg42000h0b83q8r80ags" } }
+    }
+  ) {
+    id
+    recipient {
+      id
+    }
+    author {
+      id
+    }
+  }
+}

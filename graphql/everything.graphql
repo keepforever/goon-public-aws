@@ -1,0 +1,288 @@
+## Playground Config
+
+# b's token
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjam50bDZpODMwMDByMGE3N2Fpb2xwaDYxIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1NDA3NzQyMDZ9.fwqjsS8fw-Y2s6kRvdZjDxjg5IAozRGYc0txW8hPvvM"
+}
+
+# s's token
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamxzZ2o0M3QwMDFkMDgzNm5nYWh6dXgxIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzYzNTk3MzB9.sNE4Jnze7f3O2mZKIxY26-gaLTTEN-Zchi6z6-vPzeo"
+}
+
+### Create Request Query Args
+{
+  "author": "cjjj0sapuq2vd0b37czhnbj80",
+  "recipient": "cjjj16bqeq43j0b378utu796v",
+  "title": "String!",
+  "text": "String!",
+  "wants": ["String"],
+  "isPublished": true
+}
+
+##########
+
+query myFeedPartnerships {
+  partnerships {
+    id
+    accepted
+    partner {
+      name
+    }
+  }
+}
+
+query myFeedPatronShips {
+  patronships {
+    id
+    patron {
+      name
+      id
+    }
+  }
+}
+
+query myFeedUsers {
+  users {
+    name
+    id
+    userPartners {
+      partner {
+        id
+        name
+      }
+    }
+
+  }
+}
+
+query myFeedSellers {
+  sellers {
+    name
+    id
+  }
+}
+
+mutation myUserLogin {
+  userLogin(
+    email: "b",
+    password: "b") {
+    payload {
+      token
+      user {
+        name
+      }
+    }
+    error {
+      msg
+      field
+    }
+  }
+}
+
+mutation mySellerLogin {
+  sellerLogin(
+    email: "s",
+    password: "s") {
+    payload {
+      token
+      seller {
+        name
+      }
+    }
+    error {
+      msg
+      field
+    }
+  }
+}
+
+mutation myCreatePartnershipRequest {
+  createPartnership(data: {
+    partner: {
+      connect: {
+        id: "cjlx18wvj001g0903gmjcp2xm"
+      }
+    },
+    allowance: 1,
+    accepted: false,
+    verified: false
+  }) {
+    id
+    partner {
+      name
+      id
+      patrons {
+        id
+        patron {
+          id
+          name
+        }
+      }
+    }
+    allowance
+    accepted
+    verified
+    updatedAt
+    createdAt
+  }
+}
+
+query myMeUser {
+  meUser {
+    name
+    id
+  }
+}
+
+mutation myUserSignUp {
+  userSignup(
+    name: "b",
+    email: "b",
+    password: "b"
+  ) {
+    user {
+      id
+      name
+    }
+    token
+  }
+}
+
+mutation mySellerSignUp {
+  sellerSignup(
+    name: "s",
+    email: "s",
+    password: "s"
+  ) {
+    seller {
+      id
+      name
+    }
+    token
+  }
+}
+
+mutation myUserRefreshToken {
+  refreshToken {
+    token
+    userId
+  }
+}
+
+# connects a Patronship to a sellers patrons array
+# 1 st id = Patronship# 2n d id = Seller 's id to which
+# Patronship is being appended.
+mutation myUpdateSellerPatrons mutation {
+  updateSeller(
+    data: {
+      patrons: {
+        connect: {
+          id: "cjly8zjej000d08270jctwzr3"
+        }
+      }
+    },
+    where: {
+      id: "cjlx18wvj001g0903gmjcp2xm"
+    }
+  ) {
+    id
+    patrons {
+      patron {
+        name
+        id
+      }
+    }
+  }
+}
+
+#  with vars
+mutation myUpdateSellerPatrons mutation(
+  $patronshipId: ID!
+  $sellerId: ID!) {
+  updateSeller(
+    data: {
+      patrons: {
+        connect: {
+          id: $patronshipId
+        }
+      }
+    },
+    where: {
+      id: $sellerId,
+    }
+  ) {
+    id
+    patrons {
+      patron {
+        name
+        id
+      }
+    }
+  }
+}
+
+
+mutation myUpdateUserPartnerships {
+  updateUser(
+    data: {
+      userPartners: {
+        connect: {
+          id: "cjly8zjej000d08270jctwzr3"
+        }
+      }
+    },
+    where: {
+      id: "cjlx18wvj001g0903gmjcp2xm"
+    }
+  ) {
+    id
+    userPartners {
+      partner {
+        name
+        id
+      }
+    }
+  }
+}
+
+
+mutation myCreateSellerInfo {
+  createSellerInfo(data: {
+    seller: {
+      connect: {
+        id: "cjlx18wvj001g0903gmjcp2xm"
+      }
+    },
+    about: "about this seller",
+    age: 21,
+    zipCode: 94116,
+    offerings: {
+      set: ["candy", "booze", "tacos"]
+    }
+  }) {
+    id
+    offerings
+    seller {
+      name
+    }
+  }
+}
+
+mutation myUpdateSellersSellerInfo {
+  updateSeller(data: {
+    sellerInfo: {
+      connect: {
+        id: "cjm2n0402002d08274f60wszg"
+      }
+    }
+  }, where: {
+    id: "cjm2gov17000n0827gyef9o97"
+  }) {
+    sellerInfo {
+      id
+      about
+      offerings
+    }
+  }
+}

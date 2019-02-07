@@ -1,0 +1,56 @@
+# import User, Message from "./generated/prisma.graphql"
+# import UserSettings, SellerSettings from "./generated/prisma.graphql"
+# import UserInfo, SellerInfo from "./generated/prisma.graphql"
+
+# import MessageCreateInput from "./generated/prisma.graphql"
+
+# import SellerInfoCreateInput, SellerInfo from "./generated/prisma.graphql"
+
+# import Query.users from "./generated/prisma.graphql"
+
+# import Query.connections from "./generated/prisma.graphql"
+
+# import Query.messages from "./generated/prisma.graphql"
+
+# import Mutation.updateUser from "./generated/prisma.graphql"
+# import Mutation.deleteUser from "./generated/prisma.graphql"
+
+# import Mutation.createMessage from "./generated/prisma.graphql"
+
+# import Mutation.createSellerInfo from "./generated/prisma.graphql"
+# import Mutation.createConnection from "./generated/prisma.graphql"
+
+type Query {
+  meUser: User
+}
+
+type Mutation {
+  refreshToken: RefreshTokenPayload!
+  userSignup(
+    name: String!,
+    email: String!,
+    isSeller: Boolean!,
+    password: String!,
+    ): UserAuthPayload!
+  userLogin(email: String!, password: String!): UserLoginResponse!
+}
+
+type UserLoginResponse {
+  payload: UserAuthPayload
+  error: Error
+}
+
+type RefreshTokenPayload {
+  token: String!
+  userId: String!
+}
+
+type UserAuthPayload {
+  token: String!
+  user: User!
+}
+
+type Error {
+  field: String!
+  msg: String!
+}

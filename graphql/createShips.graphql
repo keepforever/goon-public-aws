@@ -1,0 +1,45 @@
+# Seller's request to User (maybe, if I allow it) or 
+# OTHERWISE the complement to the User's createPartnership 
+# mutation that get's created within the 
+# createPartnership resolver.
+mutation myCreatePartnershipRequest {
+  createPartnership(data: {
+    partner: { connect: {
+      id: "cjlsginzg00180836r1gxn229"
+    }},
+    allowance:1,
+    accepted:false,
+    verified:false
+  }) {
+    id
+    patron {
+      name
+      id
+    }
+    allowance
+    accepted
+    verified
+    updatedAt
+    createdAt
+  }
+}
+
+# patron ID is b's 
+mutation myCreatePatronshipRequest {
+  createPatronship(data: {
+    patron: { connect: {id: "cjlsginzg00180836r1gxn229"}},
+    allowance:1,
+    accepted:false,
+    verified:false
+  }) {
+    id
+    patron {
+      name
+      id
+    }
+    allowance
+    accepted
+    verified
+    updatedAt
+    createdAt
+  }

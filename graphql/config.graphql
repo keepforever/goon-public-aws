@@ -1,0 +1,29 @@
+### this file contains queries and mutations used in the GraphQL playground
+### for quick formatting and database seeding.
+
+# b's Id: cjlx17p2q001b0903x0vra2sy
+# b's token
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanJwanJnNDIwMDBoMGI4M3E4cjgwYWdzIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1NDkyMzcwODl9.9yZa6T9yFgv1MOOlSJaWekJrvSfxQFl4mATYICQwBfo"
+}
+# seller's Id: cjlx18wvj001g0903gmjcp2xm
+# s's token
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamx4MTh3dmowMDFnMDkwM2dtamNwMnhtIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzY2MjkwMjZ9.4Ze4_Bxw2lGwLHRP2cglqaDgPLo3DN-WHoGH2WFUGk4"
+}
+
+### Create Request Query Args
+{
+  "author": "cjjj0sapuq2vd0b37czhnbj80",
+  "recipient": "cjjj16bqeq43j0b378utu796v",
+  "title": "String!",
+  "text": "String!",
+  "wants": ["String"],
+  "isPublished": true
+}
+
+###############################################################################
+
+###############################################################################
+
+###############################################################################

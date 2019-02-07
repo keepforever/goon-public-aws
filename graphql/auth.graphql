@@ -1,0 +1,63 @@
+mutation mySellerLogin {
+  sellerLogin(
+    email: "s",
+    password: "s") {
+    payload{
+      token
+      seller{
+        id
+        name
+      }
+    }
+    error{
+      msg
+      field
+    }
+  }
+}
+
+mutation myUserLogin {
+  userLogin(
+    email: "b",
+    password: "b") {
+    payload{
+      token
+      user{
+        id
+        name
+      }
+    }
+    error{
+      msg
+      field
+    }
+  }
+}
+
+mutation myUserSignUp {
+  userSignup(
+    name:"b", 
+    email:"b",
+    password:"b"
+  ) {
+    user{
+      id
+      name
+    }
+    token
+  }
+}
+
+mutation mySellerSignUp {
+  sellerSignup(
+    name:"s", 
+    email:"s",
+    password:"s"
+  ) {
+    seller{
+      id
+      name
+    }
+    token
+  }
+}

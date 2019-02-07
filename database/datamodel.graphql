@@ -1,0 +1,72 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  isSeller: Boolean @default(value: "false")
+  userInfo: UserInfo
+  userSettings: UserSettings
+  sellerInfo: SellerInfo
+  connections: [Connection!]!
+  inbox: [Message!]! @relation(name: "RecievedMessages" , onDelete: SET_NULL)
+  outbox: [Message!]! @relation(name: "WrittenMessages" , onDelete: SET_NULL)
+  createdAt: DateTime!
+}
+
+type UserInfo {
+  id: ID! @unique
+  user: User!
+  about: String!
+  interests: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+type UserSettings {
+  id: ID! @unique
+  userId: String!
+  darkMode: Boolean @default(value: "false")
+  autoAccept: Boolean @default(value: "false")
+}
+
+## SELLER ##
+type SellerInfo {
+  id: ID! @unique
+  seller: User!
+  about: String!
+  offerings: [String!]!
+  age: Int!
+  zipCode: Int!
+}
+
+## Messages ##
+type Message {
+  id: ID! @unique
+  author: User! @relation(name: "WrittenMessages", onDelete: SET_NULL)
+  recipient: User! @relation(name: "RecievedMessages" , onDelete: SET_NULL)
+  type: String! @default(value: "default-message-type")
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# User to User
+type Connection {
+  id: ID! @unique
+  allowance: Int!
+  friend: User!
+  about: String! @default(value: "default-friends-because")
+  verified: Boolean @default(value: "false")
+  accepted: Boolean @default(value: "false")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# Default Value Guide
+#
+# type Story {
+#   isPublished: Boolean @default(value: "false")
+#   someNumber: Int! @default(value: "42")
+#   title: String! @default(value: "My New Post")
+#   publishDate: DateTime! @default(value: "2018-01-26")
+# }
