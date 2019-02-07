@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   # app:
   #   container_name: docker-prisma-graphql
@@ -42,10 +42,10 @@ services:
     image: redis
     restart: always
     ports:
-    # - '6378:6378' 
+    # - '6378:6378'
       - '6379:6379'
-    # changing port mapping to 6378 because 6379 is already 
+    # changing port mapping to 6378 because 6379 is already
     # allocated for local redis server
-     
+
 volumes:
   mysql:
